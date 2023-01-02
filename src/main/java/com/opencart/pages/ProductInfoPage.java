@@ -47,8 +47,8 @@ public class ProductInfoPage {
 		for(WebElement e : metaList) {
 			String text = e.getText();
 			String metaText[] = text.split(":");
-			String key = metaText[0];
-			String val = metaText[1];
+			String key = metaText[0].trim();
+			String val = metaText[1].trim();
 			productInfoMap.put(key, val);
 		}
 		return productInfoMap;
