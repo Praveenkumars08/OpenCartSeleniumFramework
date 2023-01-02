@@ -20,6 +20,7 @@ public class LoginPage {
 	private By pwd = By.id("input-password");
 	private By loginBtn = By.xpath("//input[@value='Login']");
 	private By forgotPwdLink = By.xpath("//a[text()='Forgotten Password']");
+	private By registerLink = By.linkText("Register");
 	
 	public String getLoginPageTitle() {
 		String title = elementUtil.waitForExactTitle(AppConstants.DEFAULT_TIME_OUT, AppConstants.LOGIN_PAGE_TITLE);
@@ -46,6 +47,11 @@ public class LoginPage {
 		elementUtil.mySendKeys(pwd, password);
 		elementUtil.myClick(loginBtn);
 		return new AccountsPage(driver);
+	}
+	
+	public RegistrationPage navigateToRegisterPage() {
+		elementUtil.myClick(registerLink);
+		return new RegistrationPage(driver);
 	}
 
 }

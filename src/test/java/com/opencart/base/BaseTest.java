@@ -10,6 +10,7 @@ import com.opencart.factory.DriverFactory;
 import com.opencart.pages.AccountsPage;
 import com.opencart.pages.LoginPage;
 import com.opencart.pages.ProductInfoPage;
+import com.opencart.pages.RegistrationPage;
 import com.opencart.pages.SearchResultsPage;
 
 public class BaseTest {
@@ -21,6 +22,7 @@ public class BaseTest {
 	public AccountsPage accountsPage;
 	public SearchResultsPage searchResults;
 	public ProductInfoPage productInfo;
+	public RegistrationPage registerPage;
 	
 	
 	@BeforeTest
@@ -34,7 +36,7 @@ public class BaseTest {
 	
 	@AfterTest
 	public void tearDown() {
-		driver.quit();
+		//driver.quit();
 	}
 
 }

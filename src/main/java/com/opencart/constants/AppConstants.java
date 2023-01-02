@@ -15,5 +15,7 @@ public class AppConstants {
 	
 	public static final int DEFAULT_TIME_OUT = 5;
 	public static final int DEFAULT_LARGE_TIME_OUT = 10;
+	public static final String SUCC_MSG = "Your Account Has Been Created!";
+	public static final String SHEET_NAME = "register";
 
 }
