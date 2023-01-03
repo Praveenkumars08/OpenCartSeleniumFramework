@@ -16,29 +16,38 @@ public class DriverFactory {
 
 	public WebDriver driver;
 	public Properties prop;
-
+	
+	public static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<>();
+	
+	/**
+	 * This method is used to initialize the driver.
+	 */
 	public WebDriver initializeDriver(Properties prop) {
 		String browserName = prop.getProperty("browser").toLowerCase();
 		if(browserName.equals("chrome")) {
 			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver();
+			threadLocalDriver.set(new ChromeDriver());
 		}
 		else if(browserName.equals("firefox")) {
 			WebDriverManager.firefoxdriver().setup();
-			driver = new FirefoxDriver();
+			threadLocalDriver.set(new FirefoxDriver());
 		}
 		else if(browserName.equals("edge")) {
 			WebDriverManager.edgedriver().setup();
-			driver = new EdgeDriver();
+			threadLocalDriver.set(new EdgeDriver());
 		}
 		else {
 			System.out.println("Please pass the valid browser");
 		}
-		driver.manage().deleteAllCookies();
-		driver.manage().window().maximize();
-		driver.get(prop.getProperty("url"));
+		getDriver().manage().deleteAllCookies();
+		getDriver().manage().window().maximize();
+		getDriver().get(prop.getProperty("url"));
 
-		return driver;
+		return getDriver();
+	}
+	
+	public static synchronized WebDriver getDriver() {
+		return threadLocalDriver.get();
 	}
 
 	public Properties initializeProperties() {
