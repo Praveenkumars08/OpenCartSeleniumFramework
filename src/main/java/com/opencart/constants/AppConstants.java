@@ -5,7 +5,7 @@ import java.util.List;
 
 public class AppConstants {
 	
-	public static final String LOGIN_PAGE_URL_PARM = "awesomeqa";
+	public static final String LOGIN_PAGE_URL_PARM = "route=account";
 	public static final String LOGIN_PAGE_TITLE = "Account Login";
 	public static final String ACCT_PAGE_URL_PARM = "route=account";
 	public static final String ACCT_PAGE_TITLE = "My Account";
