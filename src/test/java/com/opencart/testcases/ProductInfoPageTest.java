@@ -9,6 +9,10 @@ import org.testng.annotations.Test;
 
 import com.opencart.base.BaseTest;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+
 public class ProductInfoPageTest extends BaseTest {
 	
 	@BeforeClass
@@ -26,6 +30,8 @@ public class ProductInfoPageTest extends BaseTest {
 		};
 	}
 	
+	@Description("Product info page, checks images count")
+	@Severity(SeverityLevel.MINOR)
 	@Test(priority = 1, dataProvider = "dataProviderForImageCheck")
 	public void productImagesCountTest(String productKey, String productName) {
 		searchResults = accountsPage.doSearch(productKey);
@@ -41,6 +47,8 @@ public class ProductInfoPageTest extends BaseTest {
 		};
 	}
 	
+	@Description("Product info page, checks the brand, code and availability")
+	@Severity(SeverityLevel.MINOR)
 	@Test(priority = 2, dataProvider = "dataProviderForMetaData")
 	public void validateProductMetaDataTest(String productKey, String productName) {
 		searchResults = accountsPage.doSearch(productKey);

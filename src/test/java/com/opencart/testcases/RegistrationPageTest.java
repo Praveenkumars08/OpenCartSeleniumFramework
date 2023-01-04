@@ -11,6 +11,10 @@ import com.opencart.base.BaseTest;
 import com.opencart.constants.AppConstants;
 import com.opencart.utilities.ExcelUtilities;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+
 public class RegistrationPageTest extends BaseTest {
 	
 	@BeforeClass
@@ -30,7 +34,8 @@ public class RegistrationPageTest extends BaseTest {
 		return eMailId;
 	}
 	
-	
+	@Description("New user Registration")
+	@Severity(SeverityLevel.NORMAL)
 	@Test(dataProvider = "registerAcctData")
 	public void registerAcctTest(String fName, String lName, String telePhone, String pwd, String subscribe) {
 		String actMsg = registerPage.doRegister(fName, lName, randomEmailGenerator(), telePhone, pwd, subscribe);

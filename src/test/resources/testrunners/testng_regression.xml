@@ -3,6 +3,9 @@
 <suite name="Regression Test Cases of OpenCart" thread-count="2" parallel="tests" verbose="4">
 	<listeners>
 		<listener class-name="com.opencart.listeners.ExtentReportListener" />
+		<listener class-name="com.opencart.listeners.AllureReportListener" />
+		<listener class-name="com.opencart.listeners.AnnotationTransformer" />
+		
 	</listeners>
 	<test name="LoginPage Test">
 		<classes>
