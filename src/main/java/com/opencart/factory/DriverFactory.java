@@ -15,6 +15,9 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.log4testng.Logger;
 
+import com.opencart.errors.ApplicationErrors;
+import com.opencart.exeptions.FrameworkException;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DriverFactory {
@@ -22,7 +25,7 @@ public class DriverFactory {
 	public WebDriver driver;
 	public Properties prop;
 	public OptionsManager op;
-	
+
 	public static final Logger LOG = Logger.getLogger(DriverFactory.class);
 	public static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<>();
 
@@ -48,6 +51,7 @@ public class DriverFactory {
 		else {
 			System.out.println("Please pass the valid browser");
 			LOG.error("Please pass the right browser"+browserName);
+			throw new FrameworkException(ApplicationErrors.BROWSER_NOT_FOUND);
 		}
 		getDriver().manage().deleteAllCookies();
 		getDriver().manage().window().maximize();
@@ -93,6 +97,7 @@ public class DriverFactory {
 					break;
 				default:
 					System.out.println("please pass the right env name...." + envName);
+					throw new FrameworkException(ApplicationErrors.ENVIRONMENT_NOT_FOUND);
 					//break;
 				}
 
@@ -110,14 +115,14 @@ public class DriverFactory {
 
 		return prop;
 	}
-	
+
 	public static String takeScreenShot() {
 		File srcFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
-		
-		
+
+
 		String path = System.getProperty("user.dir") + "/screenshot/" + System.currentTimeMillis() + ".png";
 		File destination = new File(path);
-		
+
 		try {
 			FileUtils.copyFile(srcFile, destination);
 		} catch (IOException e) {
