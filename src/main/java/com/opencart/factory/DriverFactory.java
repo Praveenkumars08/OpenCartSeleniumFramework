@@ -13,6 +13,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.log4testng.Logger;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -21,7 +22,8 @@ public class DriverFactory {
 	public WebDriver driver;
 	public Properties prop;
 	public OptionsManager op;
-
+	
+	public static final Logger LOG = Logger.getLogger(DriverFactory.class);
 	public static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<>();
 
 	/**
@@ -29,6 +31,7 @@ public class DriverFactory {
 	 */
 	public WebDriver initializeDriver(Properties prop) {
 		String browserName = prop.getProperty("browser").toLowerCase();
+		LOG.info("Browser name is :"+browserName);
 		op = new OptionsManager(prop);
 		if(browserName.equals("chrome")) {
 			WebDriverManager.chromedriver().setup();
@@ -44,6 +47,7 @@ public class DriverFactory {
 		}
 		else {
 			System.out.println("Please pass the valid browser");
+			LOG.error("Please pass the right browser"+browserName);
 		}
 		getDriver().manage().deleteAllCookies();
 		getDriver().manage().window().maximize();
@@ -64,6 +68,7 @@ public class DriverFactory {
 		// mvn clean install
 		String envName = System.getProperty("env");
 		System.out.println("-----> Running test cases on environment: ----->" + envName);
+		LOG.info("Running test cases on environment"+envName);
 
 		if (envName == null) {
 			System.out.println("No env is given..hence running it on QA env.....");
